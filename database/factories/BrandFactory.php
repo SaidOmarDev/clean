@@ -14,10 +14,10 @@ class BrandFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'slogan' => $this->faker->sentence(3),
-            'logo' => $this->faker->image(storage_path('app/public'), 70, 70, null, false),
-            'user_id' => $this->faker->unique()->numberBetween(1, 15)
+            'name'    => $this->faker->name(),
+            'slogan'  => $this->faker->sentence(3),
+            'logo'    => $this->faker->image(storage_path('app/public'), 70, 70, null, false),
+            'user_id' => $this->faker->unique()->numberBetween(1, 15),
         ];
     }
 }

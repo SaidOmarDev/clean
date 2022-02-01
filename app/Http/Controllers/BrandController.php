@@ -13,7 +13,7 @@ class BrandController extends Controller
     public function index()
     {
         return inertia('Brands/Index', [
-            'brands' => BrandResource::collection(Brand::with('owner')->paginate(5))
+            'brands' => BrandResource::collection(Brand::with('owner')->paginate(5)),
         ]);
     }
 
@@ -21,20 +21,20 @@ class BrandController extends Controller
     {
         $owners = User::all()->map(function ($owner) {
             return [
-                'id' => $owner->id,
-                'name' => $owner->name
+                'id'   => $owner->id,
+                'name' => $owner->name,
             ];
         });
 
         return inertia('Brands/Create', [
-            'owners' => $owners
+            'owners' => $owners,
         ]);
     }
 
     public function store(StoreBrandRequest $request)
     {
         Brand::create(array_merge($request->validated(), [
-            'logo' => $request->file('logo')->store('brands/logos')
+            'logo' => $request->file('logo')->store('brands/logos'),
         ]));
 
         return redirect('/brands')->with('success', 'New brand is created!');
@@ -44,14 +44,14 @@ class BrandController extends Controller
     {
         $owners = User::all()->map(function ($owner) {
             return [
-                'id' => $owner->id,
-                'name' => $owner->name
+                'id'   => $owner->id,
+                'name' => $owner->name,
             ];
         });
         // dd(new BrandResource($brand->with('owner')->findOrFail($brand->id)));
         return inertia('Brands/Edit', [
-            'brand' => new BrandResource($brand->with('owner')->findOrFail($brand->id)),
-            'owners' => $owners
+            'brand'  => new BrandResource($brand->with('owner')->findOrFail($brand->id)),
+            'owners' => $owners,
         ]);
     }
 

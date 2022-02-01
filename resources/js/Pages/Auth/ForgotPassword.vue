@@ -1,5 +1,5 @@
 <template>
-    <Head title="ForgetPassword" />
+    <Head title="ForgetPassword"/>
     <div class="min-h-screen grid place-items-center">
         <section class="p-10 card bg-base-200 md:w-3/6 w-full">
             <form @submit.prevent="submit">
@@ -7,7 +7,7 @@
                     <label class="label">
                         <span class="label-text">Email</span>
                     </label>
-                    <input type="email" v-model="form.email" placeholder="Enter your email" class="input">
+                    <input v-model="form.email" class="input" placeholder="Enter your email" type="email">
                     <div v-if="form.errors.email" class="text-red-500 text-sm my-2">{{ form.errors.email }}</div>
                 </div>
                 <button class="btn mt-3 w-full">Send reset link</button>
@@ -17,16 +17,19 @@
 </template>
 
 <script>
-import { useForm } from '@inertiajs/inertia-vue3';
+import {useForm} from '@inertiajs/inertia-vue3';
+
 export default {
-    setup(){
+    setup() {
         const form = useForm({
             email: ''
         })
-        function submit(){
+
+        function submit() {
             form.post('/forgot-password')
         }
-        return { form, submit};
+
+        return {form, submit};
     },
     layout: ''
 }

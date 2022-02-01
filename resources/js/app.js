@@ -1,20 +1,22 @@
-import { createApp, h } from 'vue'
-import { createInertiaApp, Link, Head } from '@inertiajs/inertia-vue3'
-import { InertiaProgress } from '@inertiajs/progress'
+import {Quasar} from 'quasar'
+import {createApp, h} from 'vue'
 import Layout from './Shared/Layout.vue'
+import {InertiaProgress} from '@inertiajs/progress'
+import {createInertiaApp, Head, Link} from '@inertiajs/inertia-vue3'
 
 
 createInertiaApp({
   resolve: async name => {
     let page = (await import(`./Pages/${name}`)).default;
-      page.layout ??= Layout;
+    page.layout ??= Layout;
 
-      return page;
+    return page;
   },
 
-  setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
+  setup({el, App, props, plugin}) {
+    createApp({render: () => h(App, props)})
       .use(plugin)
+      .use(Quasar)
       .component('Link', Link)
       .component('Head', Head)
       .mount(el)
@@ -22,4 +24,6 @@ createInertiaApp({
   title: title => 'Dash - ' + title
 })
 
-InertiaProgress.init({})
+InertiaProgress.init({
+  showSpinner: true,
+})

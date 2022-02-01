@@ -8,31 +8,31 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all()->map(fn ($user) => [
-            'id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'mobile' => $user->mobile
+        $users = User::all()->map(fn($user) => [
+            'id'     => $user->id,
+            'name'   => $user->name,
+            'email'  => $user->email,
+            'mobile' => $user->mobile,
         ]);
         return inertia('Users/index', [
-            'users' => $users
+            'users' => $users,
         ]);
     }
 
     public function show(User $user)
     {
         return inertia('Users/Show', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
     public function update(User $user)
     {
         $attr = request()->validate([
-            'name' => ['required'],
-            'email' => ['required', 'email'],
+            'name'   => ['required'],
+            'email'  => ['required', 'email'],
             'avatar' => ['required'],
-            'mobile' => ['required']
+            'mobile' => ['required'],
         ]);
 
         $user->update($attr);
