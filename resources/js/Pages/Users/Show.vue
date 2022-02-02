@@ -7,16 +7,16 @@
                 <!-- Profile Card -->
                 <div class="bg-white p-3 border-t-4 border-green-400">
                     <div class="image overflow-hidden" style="width:100%; height: 200px; border: 1px solid #eee">
-                        <img class="h-auto w-full mx-auto"
-                            :src="`base_path(storage/${user.avatar})`"
-                            alt="User Avatar">
+                        <img :src="`base_path(storage/${user.avatar})`"
+                             alt="User Avatar"
+                             class="h-auto w-full mx-auto">
                     </div>
                     <ul
                         class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                         <li class="flex items-center py-3">
                             <span>Status</span>
                             <span class="ml-auto"><span
-                                    class="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span></span>
+                                class="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span></span>
                         </li>
                         <li class="flex items-center py-3">
                             <span>Member since</span>
@@ -33,10 +33,10 @@
                 <div class="bg-white p-3 shadow-sm rounded-sm">
                     <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
                         <span clas="text-green-500">
-                            <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            <svg class="h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"/>
                             </svg>
                         </span>
                         <span class="tracking-wide">About</span>
@@ -58,7 +58,7 @@
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Email.</div>
                                 <div class="px-4 py-2">
-                                    <a class="text-blue-800" :href="'mailto:' + user.email">{{ user.email }}</a>
+                                    <a :href="'mailto:' + user.email" class="text-blue-800">{{ user.email }}</a>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2">
@@ -68,11 +68,11 @@
                         </div>
                     </div>
                     <label
-                        for="profile-modal"
-                        class="btn btn-primary modal-button mt-8 text-sm font-semibold rounded-lg hover:bg-gray-100 hover:text-blue-800 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4 float-right">
+                        class="btn btn-primary modal-button mt-8 text-sm font-semibold rounded-lg hover:bg-gray-100 hover:text-blue-800 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4 float-right"
+                        for="profile-modal">
                         Update profile
                     </label>
-                    <input type="checkbox" id="profile-modal" class="modal-toggle">
+                    <input id="profile-modal" class="modal-toggle" type="checkbox">
                     <div class="modal">
                         <div class="modal-box">
                             <form @submit.prevent="submit">
@@ -81,29 +81,35 @@
                                         <label class="label">
                                             <span class="label-text">Name</span>
                                         </label>
-                                        <input type="text" v-model="user.name" class="input">
+                                        <input v-model="user.name" class="input" type="text">
                                         <!-- <div v-if="errors.name" class="text-red-500 text-sm my-2">{{ errors.name }}</div> -->
                                     </div>
                                     <div class="form-control mb-3">
                                         <label class="label">
                                             <span class="label-text">Email</span>
                                         </label>
-                                        <input type="email" v-model="user.email" class="input">
+                                        <input v-model="user.email" class="input" type="email">
                                         <!-- <div v-if="errors.email" class="text-red-500 text-sm my-2">{{ errors.email }}</div> -->
                                     </div>
                                     <div class="form-control mb-3">
                                         <label class="label">
                                             <span class="label-text">User avatar</span>
                                         </label>
-                                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                        <div
+                                            class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                             <div class="space-y-1 text-center">
-                                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <svg aria-hidden="true" class="mx-auto h-12 w-12 text-gray-400" fill="none"
+                                                     stroke="currentColor" viewBox="0 0 48 48">
+                                                    <path
+                                                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
                                                 </svg>
                                                 <div class="flex text-sm text-gray-600">
-                                                    <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                                    <label class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                                           for="file-upload">
                                                         <span>Upload a file</span>
-                                                        <input id="file-upload" @input="user.avatar = $event.target.files[0]" name="file-upload" type="file" class="sr-only">
+                                                        <input id="file-upload" class="sr-only"
+                                                               name="file-upload" type="file" @input="user.avatar = $event.target.files[0]">
                                                     </label>
                                                     <p class="pl-1">or drag and drop</p>
                                                 </div>
@@ -117,37 +123,38 @@
                                         </div>
                                     </div>
                                     <div class="form-control mb-5">
-                                        <label for="owner" class="label">
+                                        <label class="label" for="owner">
                                             <span class="label-text">User Mobile</span>
                                         </label>
-                                        <input type="text" v-model="user.mobile" class="input">
+                                        <input v-model="user.mobile" class="input" type="text">
                                         <!-- <div v-if="errors.mobile" class="text-red-500 text-sm my-2">{{ errors.mobile }}</div> -->
                                     </div>
                                     <button class="btn">Update</button>
                                 </div>
                             </form>
                             <div class="modal-action">
-                                <label for="profile-modal" class="btn">Close</label>
+                                <label class="btn" for="profile-modal">Close</label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- End of about section -->
             </div>
-                <!-- End of profile tab -->
+            <!-- End of profile tab -->
         </div>
     </div>
 </template>
 
 <script>
-import { Inertia } from '@inertiajs/inertia';
+import {Inertia} from '@inertiajs/inertia';
+
 export default {
     setup(props) {
-        function submit(){
-            Inertia.put('/users/'+ props.user.id, props.user);
+        function submit() {
+            Inertia.put('/users/' + props.user.id, props.user);
         }
 
-        return { submit };
+        return {submit};
     },
     props: {
         user: Array

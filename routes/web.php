@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\UserController;
-use App\Models\User;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 
@@ -42,7 +41,7 @@ Route::get('/forgot-password', function () {
 
 Route::post('/forgot-password', function () {
     request()->validate([
-        'email' => 'required|email'
+        'email' => 'required|email',
     ]);
 
     $status = Password::sendResetLink(
@@ -50,8 +49,8 @@ Route::post('/forgot-password', function () {
     );
 
     return $status === Password::RESET_LINK_SENT
-                ? back()->with(['status' => __($status)])
-                : back()->withErrors(['email' => __($status)]);
+        ? back()->with(['status' => __($status)])
+        : back()->withErrors(['email' => __($status)]);
 })->middleware('guest')->name('password.email');
 
 Route::get('/reset-password/{token}', function ($token) {
@@ -60,8 +59,8 @@ Route::get('/reset-password/{token}', function ($token) {
 
 Route::post('/reset-password', function () {
     request()->validate([
-        'token' => 'required',
-        'email' => 'required|email',
+        'token'    => 'required',
+        'email'    => 'required|email',
         'password' => 'required|min:8|confirmed',
     ]);
 
@@ -69,13 +68,13 @@ Route::post('/reset-password', function () {
         request()->only('email', 'password', 'password_confirmation', 'token'),
         function ($user, $password) {
             $user->forceFill([
-                'password' => Hash::make($password)
+                'password' => Hash::make($password),
             ])->setRememberToken(Str::random(60));
             $user->save();
         }
     );
 
     return $status === Password::PASSWORD_RESET
-                ? redirect()->route('login')->with('status', __($status))
-                : back()->withErrors(['email' => [__($status)]]);
+        ? redirect()->route('login')->with('status', __($status))
+        : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
