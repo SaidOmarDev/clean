@@ -1,6 +1,6 @@
 <template>
     <Head title="Home"></Head>
-    <h1>Home page</h1>
+    <h4 class="q-ma-none">Home page...</h4>
 </template>
 
 <script>
